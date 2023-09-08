@@ -353,3 +353,20 @@ button.standard-button:disabled {
 .active-black-screen {
 	display: flex;
 }
+
+.back-up {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	bottom: 60px;
+	right: 25%;
+	width: 48px;
+	height: 48px;
+	background-color: var(--secondary-color);
+	color: var(--primary-color);
+	border-radius: 50%;
+	font-size: 40px;
+	cursor: pointer;
+	border: 3px solid var(--primary-color-darker);
+}

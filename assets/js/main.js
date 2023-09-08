@@ -168,6 +168,7 @@
         const campoNome = document.getElementById('input-name');
         const botaoAdicionar = document.getElementById('add-person');
         const botaoSortear = document.getElementById('catch-pokemon');
+        const backUp = document.getElementById('back-up');
 
         verificaLista(botaoSortear);
 
@@ -197,7 +198,12 @@
             pokemonsSorteados = await sortearPokemon();
             imprimirPokeCard(pokemonsSorteados);
             loadingScreen.classList.remove('active-black-screen');
+            document.getElementById('pokemon-grid').scrollIntoView();
         });
+
+        backUp.addEventListener('click', () => {
+            document.getElementById('players-list-view').scrollIntoView();
+        })
     }
 
     main()

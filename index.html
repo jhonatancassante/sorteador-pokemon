@@ -30,7 +30,10 @@
 	</head>
 
 	<body>
-		<section class="container">
+		<section
+			id="players-list-view"
+			class="container"
+		>
 			<h1>Sorteador de Pokemon</h1>
 			<p>Adicione as pessoas e depois click em sortear.</p>
 
@@ -56,7 +59,10 @@
 			</form>
 			<ul id="names-list"></ul>
 		</section>
-		<section class="container">
+		<section
+			id="pokemon-grid"
+			class="container"
+		>
 			<button
 				id="catch-pokemon"
 				class="standard-button"
@@ -65,6 +71,12 @@
 				Sortear
 			</button>
 			<div id="pokemon-card-place"></div>
+			<div
+				class="back-up"
+				id="back-up"
+			>
+				<ion-icon name="arrow-up-circle-outline"></ion-icon>
+			</div>
 		</section>
 
 		<script src="./assets/js/main.js"></script>
