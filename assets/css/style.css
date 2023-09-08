@@ -275,3 +275,81 @@ button.standard-button:disabled {
 	background-color: rgb(0, 56, 187);
 	color: #fff;
 }
+
+.black-screen {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	justify-content: center;
+	align-items: center;
+	animation: animateBg 10s linear infinite;
+}
+
+@keyframes animateBg {
+	0% {
+		filter: hue-rotate(0deg);
+	}
+	100% {
+		filter: hue-rotate(360deg);
+	}
+}
+
+.loader {
+	position: relative;
+	width: 120px;
+	height: 120px;
+}
+
+.loader span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transform: rotate(calc(18deg * var(--i)));
+}
+
+.loader span::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background-color: #00ff0a;
+	box-shadow: 0 0 10px #00ff0a, 0 0 20px #00ff0a, 0 0 40px #00ff0a,
+		0 0 60px #00ff0a, 0 0 80px #00ff0a, 0 0 100px #00ff0a;
+	animation: animateLoading 2s linear infinite;
+	animation-delay: calc(0.1s * var(--i));
+	transform: scale(0);
+}
+
+@keyframes animateLoading {
+	0% {
+		transform: scale(1);
+	}
+	80%,
+	100% {
+		transform: scale(0);
+	}
+}
+
+.loading-text {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--secondary-color);
+	font-weight: 700;
+}
+
+.active-black-screen {
+	display: flex;
+}

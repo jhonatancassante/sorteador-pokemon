@@ -1,7 +1,7 @@
 (() => {
     const MAX_POKE = 1010
     const API_URL = 'https://pokeapi.co/api/v2/pokemon/'
-    const players = [];
+    let players = [];
     let pokemonsSorteados = [];
 
     const numeroAleatorio = () => Math.floor(Math.random() * (MAX_POKE - 1 + 1) + 1);
@@ -41,12 +41,17 @@
     function verificarCampo(campo, botao) {
         const mensagem = document.getElementById('message');
 
+        campo.classList.add('input-error');
+        botao.disabled = true;
+
         if (players.includes(campo.value.toLowerCase())) {
-            campo.classList.add('input-error');
-            botao.disabled = true;
             mensagem.innerHTML = 'Jogador já cadastrado!';
             return false;
-        } else {
+        } else if (campo.value.trim().length === 0) {
+            mensagem.innerHTML = 'Campo vazio!';
+            return false;
+        }
+        else {
             campo.classList.remove('input-error');
             botao.disabled = false;
             mensagem.innerHTML = "";
@@ -110,7 +115,7 @@
         return todosPokemon;
     }
 
-    function criarPokeCard(pokePlayer) {
+    function criarPokeCard(pokePlayer, i) {
         let types = '';
 
         for (const type of pokePlayer.pokemon.types) {
@@ -121,7 +126,7 @@
 
         return `
             <div class="poke-card">
-            <div class="player-name">${priMaiuscula(pokePlayer.player)}</div>
+            <div class="player-name">#${i} - ${priMaiuscula(pokePlayer.player)}</div>
             <figure>
                 <img src="${pokePlayer.pokemon.url}" title="${pokePlayer.pokemon.nome}" alt="Imagem do pokemon ${pokePlayer.pokemon.nome}" />
                 <figcaption>
@@ -140,9 +145,23 @@
 
         place.innerHTML = '';
 
-        for (const pokePlayer of pokePlayers) {
-            place.innerHTML += criarPokeCard(pokePlayer);
+        for (let i = 0; i < pokePlayers.length; i++) {
+            place.innerHTML += criarPokeCard(pokePlayers[i], i + 1);
         }
+    }
+
+    function shuffle(array) {
+        let currentIndex = array.length, randomIndex;
+
+        while (currentIndex > 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+        }
+
+        return array;
     }
 
     async function main() {
@@ -171,8 +190,13 @@
         });
 
         botaoSortear.addEventListener('click', async () => {
+            const loadingScreen = document.getElementById('loading-screen');
+
+            loadingScreen.classList.add('active-black-screen');
+            shuffle(players);
             pokemonsSorteados = await sortearPokemon();
             imprimirPokeCard(pokemonsSorteados);
+            loadingScreen.classList.remove('active-black-screen');
         });
     }
 
