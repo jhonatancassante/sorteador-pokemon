@@ -359,8 +359,8 @@ button.standard-button:disabled {
 	justify-content: center;
 	align-items: center;
 	position: fixed;
-	bottom: 60px;
-	right: 25%;
+	bottom: 40px;
+	right: 15%;
 	width: 48px;
 	height: 48px;
 	background-color: var(--secondary-color);
