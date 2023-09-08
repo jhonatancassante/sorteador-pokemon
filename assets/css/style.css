@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+:root {
+	--primary-color: rgb(17, 86, 102);
+	--primary-color-darker: rgb(9, 48, 56);
+	--secondary-color: rgb(240, 247, 253);
+	--error-color: rgb(164, 0, 0);
+}
+
+* {
+	box-sizing: border-box;
+	outline: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: var(--primary-color);
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.3em;
+	line-height: 1.5em;
+}
+
+.container {
+	max-width: 640px;
+	margin: 50px auto;
+	background-color: var(--secondary-color);
+	padding: 20px;
+	border-radius: 10px;
+}
+
+.container p {
+	text-align: justify;
+}
+
+form input,
+form label,
+button {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+	border-radius: 10px;
+}
+
+form input {
+	font-size: 24px;
+	height: 50px;
+	padding: 0 20px;
+}
+
+form input:focus {
+	outline: 1px solid var(--primary-color);
+	border: 1px solid var(--primary-color);
+}
+
+button.standard-button {
+	border: none;
+	background-color: var(--primary-color);
+	color: var(--secondary-color);
+	font-size: 18px;
+	font-weight: bold;
+	height: 50px;
+	cursor: pointer;
+	margin-top: 30px;
+}
+
+button.standard-button:hover {
+	background-color: var(--primary-color-darker);
+}
+
+button.standard-button:disabled {
+	background-color: var(--primary-color-darker);
+	cursor: default;
+}
+
+.input-error {
+	outline: 1px solid var(--error-color);
+	border: 1px solid var(--error-color);
+	color: var(--error-color);
+}
+
+.input-error:focus {
+	outline: 1px solid var(--error-color);
+	border: 1px solid var(--error-color);
+	color: var(--error-color);
+}
+
+#message {
+	font-size: 14px;
+	font-weight: 700;
+	text-align: center;
+	line-height: 6px;
+	color: var(--error-color);
+}
+
+#names-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+#names-list li {
+	display: flex;
+	width: 45%;
+	overflow: hidden;
+	justify-content: center;
+	align-items: center;
+	list-style: none;
+}
+
+#names-list li ion-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 16px;
+	margin-left: 12px;
+	cursor: pointer;
+	color: var(--error-color);
+}
+
+#pokemon-card-place {
+	display: grid;
+	grid-template-columns: 50% 50%;
+}
+
+.poke-card {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	justify-content: space-between;
+	width: 240px;
+	height: 350px;
+	align-items: center;
+	border: 1px solid var(--primary-color);
+	border-radius: 10px;
+	margin: 20px;
+	padding: 10px;
+}
+
+.poke-card .player-name {
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.poke-card figure {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.poke-card img {
+	max-width: 90%;
+	max-height: 180px;
+}
+
+.poke-card figcaption {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	align-items: center;
+	width: 100%;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.poke-card figcaption .types {
+	display: flex;
+	position: absolute;
+	bottom: 30px;
+	width: 100%;
+	justify-content: space-around;
+}
+
+.poke-card figcaption .types .type-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 30px;
+	width: 90px;
+	font-weight: 700;
+	border-radius: 10px;
+	text-transform: uppercase;
+}
+
+.bug {
+	background-color: rgb(62, 169, 62);
+	color: #fff;
+}
+
+.dark {
+	background-color: rgb(46, 37, 32);
+	color: #fff;
+}
+
+.dragon {
+	background-color: rgb(120, 82, 177);
+	color: #fff;
+}
+
+.electric {
+	background-color: rgb(255, 217, 0);
+	color: #000;
+}
+
+.fairy {
+	background-color: rgb(250, 163, 247);
+	color: #000;
+}
+
+.fighting {
+	background-color: rgb(255, 0, 0);
+	color: #fff;
+}
+
+.fire {
+	background-color: rgb(255, 81, 0);
+	color: #fff;
+}
+
+.flying {
+	background-color: rgb(49, 231, 255);
+	color: #000;
+}
+
+.ghost {
+	background-color: rgb(35, 0, 87);
+	color: #fff;
+}
+
+.grass {
+	background-color: rgb(0, 125, 31);
+	color: #fff;
+}
+
+.ground {
+	background-color: rgb(116, 80, 26);
+	color: #fff;
+}
+
+.ice {
+	background-color: rgb(70, 180, 239);
+	color: #000;
+}
+
+.normal {
+	background-color: rgb(200, 200, 200);
+	color: #000;
+}
+
+.poison {
+	background-color: rgb(92, 18, 113);
+	color: #fff;
+}
+
+.psychic {
+	background-color: rgb(255, 105, 237);
+	color: #000;
+}
+
+.rock {
+	background-color: rgb(171, 160, 0);
+	color: #000;
+}
+
+.steel {
+	background-color: rgb(79, 79, 79);
+	color: #fff;
+}
+
+.water {
+	background-color: rgb(0, 56, 187);
+	color: #fff;
+}

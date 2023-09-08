@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="X-UA-Compatible"
+			content="IE=edge"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Modelo</title>
+		<link
+			rel="stylesheet"
+			href="./assets/css/style.css"
+		/>
+		<script
+			type="module"
+			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+		></script>
+		<script
+			nomodule
+			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+		></script>
+	</head>
+
+	<body>
+		<section class="container">
+			<h1>Sorteador de Pokemon</h1>
+			<p>Adicione as pessoas e depois click em sortear.</p>
+
+			<form
+				action=""
+				method="get"
+			>
+				<label for="input-name">Nome</label>
+				<input
+					type="text"
+					name="input-name"
+					id="input-name"
+					maxlength="20"
+				/>
+				<div id="message"></div>
+				<button
+					id="add-person"
+					class="standard-button"
+					disabled
+				>
+					Adicionar
+				</button>
+			</form>
+			<ul id="names-list"></ul>
+		</section>
+		<section class="container">
+			<button
+				id="catch-pokemon"
+				class="standard-button"
+				disabled
+			>
+				Sortear
+			</button>
+			<div id="pokemon-card-place"></div>
+		</section>
+
+		<script src="./assets/js/main.js"></script>
+	</body>
+</html>
