@@ -27,7 +27,7 @@ body {
 .container {
 	max-width: 1000px;
 	width: 100%;
-	min-width: 390px;
+	min-width: 300px;
 	margin: 20px;
 	background-color: var(--secondary-color);
 	padding: 20px;
@@ -47,7 +47,9 @@ select,
 form label,
 button {
 	display: block;
-	width: 330px;
+	min-width: 200px;
+	width: 100%;
+	max-width: 330px;
 	margin-bottom: 10px;
 	border-radius: 10px;
 }
@@ -170,6 +172,13 @@ button.standard-button:disabled {
 	position: relative;
 	height: 100%;
 	width: 100%;
+}
+
+.vs-text {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
 }
 
 .poke-card .player-name {
@@ -417,6 +426,15 @@ button.standard-button:disabled {
 	}
 }
 
+@media screen and (max-width: 1020px) {
+	#pokemon-card-place.double {
+		grid-template-columns: 1fr;
+	}
+	.back-up {
+		right: 60px;
+	}
+}
+
 @media screen and (max-width: 860px) {
 	#pokemon-card-place {
 		grid-template-columns: 1fr 1fr;
@@ -426,5 +444,25 @@ button.standard-button:disabled {
 @media screen and (max-width: 620px) {
 	#pokemon-card-place {
 		grid-template-columns: 1fr;
+	}
+}
+
+@media screen and (max-width: 570px) {
+	.double-card {
+		width: 240px;
+		height: 500px;
+	}
+	.vs-text {
+		height: auto;
+		width: 100%;
+	}
+	.poke-double {
+		display: flex;
+		flex-direction: column;
+		justify-content: end;
+		align-items: center;
+		position: relative;
+		height: 100%;
+		width: 100%;
 	}
 }

@@ -4,8 +4,6 @@ export const verificarCampo = (campo, players, botao) => {
     campo.classList.add('input-error');
     botao.disabled = true;
 
-    console.log(players)
-
     if (players.filter(player =>
         player.nome.toLowerCase() === campo.value.toLowerCase()
     ).length > 0) {

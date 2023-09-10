@@ -26,7 +26,7 @@ export const criarDoubleCard = (player, i) => {
             #${player.pokemon.id} ${player.pokemon.nome}
             </figcaption>
         </figure>
-        <div class="vs-text">VS</div>
+        <div class="vs-text">E</div>
         <figure>
             <img src="${player.pokemon2.url}" title="${player.pokemon2.nome}" alt="Imagem do pokemon ${player.pokemon2.nome}" />
             <figcaption>
