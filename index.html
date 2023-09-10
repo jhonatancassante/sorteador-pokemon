@@ -27,6 +27,11 @@
 			rel="shortcut icon"
 			href="assets\img\Pokeball.png"
 		/>
+		<script
+			type="module"
+			src="./assets/js/main.js"
+			defer
+		></script>
 	</head>
 
 	<body>
@@ -35,12 +40,23 @@
 			class="container"
 		>
 			<h1>Sorteador de Pokemon</h1>
-			<p>Adicione as pessoas e depois click em sortear.</p>
+			<p>
+				Selecione se será duplo ou não, adicione as pessoas e depois click em
+				sortear.
+			</p>
 
 			<form
 				action=""
 				method="get"
 			>
+				<label for="input-double">Duplo?</label>
+				<select
+					name="input-double"
+					id="input-double"
+				>
+					<option value="nao">Não</option>
+					<option value="sim">Sim</option>
+				</select>
 				<label for="input-name">Nome</label>
 				<input
 					type="text"
@@ -79,7 +95,6 @@
 			</div>
 		</section>
 
-		<script src="./assets/js/main.js"></script>
 		<div
 			id="loading-screen"
 			class="black-screen"

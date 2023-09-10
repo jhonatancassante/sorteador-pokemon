@@ -1,102 +1,14 @@
+import { verificarCampo } from "./utils/verificarCampo.js";
+import { imprimirLista } from "./views/imprimirLista.js";
+import { imprimirPokeCard } from "./views/imprimirPokeCard.js";
+import { Player } from "./models/player.js";
+import { utils } from "./utils/utils.js";
+
 (() => {
-    const MAX_POKE = 1010
-    const API_URL = 'https://pokeapi.co/api/v2/pokemon/'
     let players = [];
-    let pokemonsSorteados = [];
-
-    const numeroAleatorio = () => Math.floor(Math.random() * (MAX_POKE - 1 + 1) + 1);
-
-    const priMaiuscula = (texto) => {
-        let textoSeparado = texto.split(' ');
-
-        for (let i = 0; i < textoSeparado.length; i++) {
-            textoSeparado[i] = textoSeparado[i][0].toUpperCase() + textoSeparado[i].slice(1);
-        }
-
-        return textoSeparado.join(' ');
-    };
-
-    async function pegarPokemon() {
-        const numero = numeroAleatorio();
-
-        try {
-            const response = await fetch(API_URL + numero, { method: 'GET' });
-            const data = await response.json();
-
-            let id = data.id;
-            let nome = priMaiuscula(data.name);
-            let url = data.sprites.other.dream_world.front_default ?? data.sprites.home.home.front_default;
-            let types = [];
-
-            for (const element of data.types) {
-                types.push({ nome: priMaiuscula(element.type.name), url: element.type.url, });
-            }
-
-            return { id, nome, url, types };
-        } catch (error) {
-            return pegarPokemon();
-        }
-    }
-
-    function verificarCampo(campo, botao) {
-        const mensagem = document.getElementById('message');
-
-        campo.classList.add('input-error');
-        botao.disabled = true;
-
-        if (players.includes(campo.value.toLowerCase())) {
-            mensagem.innerHTML = 'Jogador já cadastrado!';
-            return false;
-        } else if (campo.value.trim().length === 0) {
-            mensagem.innerHTML = 'Campo vazio!';
-            return false;
-        }
-        else {
-            campo.classList.remove('input-error');
-            botao.disabled = false;
-            mensagem.innerHTML = "";
-            return true;
-        }
-    }
-
-    function excluirPlayer(id) {
-        const index = players.indexOf(id);
-
-        players.splice(index, 1);
-        pokemonsSorteados.splice(index, 1);
-
-        imprimirLista();
-        imprimirPokeCard(pokemonsSorteados);
-    }
-
-    function imprimirLista() {
-        const localLista = document.getElementById('names-list');
-
-        localLista.innerHTML = '';
-
-        players.forEach((player) => {
-            let playerLi = document.createElement('li');
-            let botaoExcluir = document.createElement('ion-icon');
-
-            playerLi.innerHTML = `${priMaiuscula(player)}`;
-            botaoExcluir.innerHTML = '<ion-icon name="trash-outline"></ion-icon>';
-
-            playerLi.id = `${player}-li`;
-            botaoExcluir.id = player;
-
-            botaoExcluir.name = 'trash-outline';
-            botaoExcluir.onclick = () => {
-                excluirPlayer(player);
-                return false;
-            };
-
-            playerLi.appendChild(botaoExcluir);
-            localLista.appendChild(playerLi);
-        });
-    }
 
     function verificaLista(botao) {
-        if (players.length <= 1) {
+        if (players.length < 1) {
             botao.disabled = true;
         } else {
             botao.disabled = false;
@@ -104,64 +16,9 @@
     }
 
     async function sortearPokemon() {
-        const todosPokemon = [];
-
         for (const player of players) {
-            let pokemon = await pegarPokemon();
-
-            todosPokemon.push({ player, pokemon });
+            await player.pegarPokemon();
         }
-
-        return todosPokemon;
-    }
-
-    function criarPokeCard(pokePlayer, i) {
-        let types = '';
-
-        for (const type of pokePlayer.pokemon.types) {
-            types += `
-                <div class="type-box ${type.nome.toLowerCase()}">${type.nome}</div>
-            `;
-        }
-
-        return `
-            <div class="poke-card">
-            <div class="player-name">#${i} - ${priMaiuscula(pokePlayer.player)}</div>
-            <figure>
-                <img src="${pokePlayer.pokemon.url}" title="${pokePlayer.pokemon.nome}" alt="Imagem do pokemon ${pokePlayer.pokemon.nome}" />
-                <figcaption>
-                <div class="types">${types}</div>
-
-                #${pokePlayer.pokemon.id} ${pokePlayer.pokemon.nome}
-                </figcaption>
-            </figure>
-
-            </div>
-        `;
-    }
-
-    function imprimirPokeCard(pokePlayers) {
-        const place = document.getElementById('pokemon-card-place');
-
-        place.innerHTML = '';
-
-        for (let i = 0; i < pokePlayers.length; i++) {
-            place.innerHTML += criarPokeCard(pokePlayers[i], i + 1);
-        }
-    }
-
-    function shuffle(array) {
-        let currentIndex = array.length, randomIndex;
-
-        while (currentIndex > 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-
-            [array[currentIndex], array[randomIndex]] = [
-                array[randomIndex], array[currentIndex]];
-        }
-
-        return array;
     }
 
     async function main() {
@@ -173,30 +30,30 @@
         verificaLista(botaoSortear);
 
         campoNome.addEventListener('input', () => {
-            verificarCampo(campoNome, botaoAdicionar);
+            verificarCampo(campoNome, players, botaoAdicionar);
         });
 
         botaoAdicionar.addEventListener('click', (event) => {
             event.preventDefault();
 
-            if (verificarCampo(campoNome, botaoAdicionar)) {
-                players.push(campoNome.value.toLowerCase());
+            if (verificarCampo(campoNome, players, botaoAdicionar)) {
+                players.push(new Player(campoNome.value.toLowerCase()));
                 campoNome.value = '';
                 campoNome.focus();
             }
 
             verificaLista(botaoSortear);
 
-            imprimirLista();
+            imprimirLista(players);
         });
 
         botaoSortear.addEventListener('click', async () => {
             const loadingScreen = document.getElementById('loading-screen');
 
             loadingScreen.classList.add('active-black-screen');
-            shuffle(players);
-            pokemonsSorteados = await sortearPokemon();
-            imprimirPokeCard(pokemonsSorteados);
+            await sortearPokemon();
+            utils.shuffle(players);
+            imprimirPokeCard(players);
             loadingScreen.classList.remove('active-black-screen');
             document.getElementById('pokemon-grid').scrollIntoView();
         });

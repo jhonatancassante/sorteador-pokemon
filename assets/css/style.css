@@ -14,7 +14,7 @@
 
 body {
 	margin: 0;
-	padding: 0;
+	padding: 50px;
 	background-color: var(--primary-color);
 	font-family: 'Open Sans', sans-serif;
 	font-size: 1.3em;
@@ -25,11 +25,17 @@ body {
 }
 
 .container {
-	max-width: 640px;
-	margin: 20px 50px;
+	max-width: 1000px;
+	width: 100%;
+	min-width: 390px;
+	margin: 20px;
 	background-color: var(--secondary-color);
 	padding: 20px;
 	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
 .container p {
@@ -37,21 +43,24 @@ body {
 }
 
 form input,
+select,
 form label,
 button {
 	display: block;
-	width: 100%;
+	width: 330px;
 	margin-bottom: 10px;
 	border-radius: 10px;
 }
 
-form input {
+form input,
+select {
 	font-size: 24px;
 	height: 50px;
 	padding: 0 20px;
 }
 
-form input:focus {
+form input:focus,
+select:focus {
 	outline: 1px solid var(--primary-color);
 	border: 1px solid var(--primary-color);
 }
@@ -97,18 +106,23 @@ button.standard-button:disabled {
 }
 
 #names-list {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-content: space-between;
+	justify-items: stretch;
+	margin: 0;
+	padding: 0;
+	width: 330px;
 }
 
 #names-list li {
 	display: flex;
-	width: 45%;
+	width: 100%;
 	overflow: hidden;
 	justify-content: center;
 	align-items: center;
 	list-style: none;
+	margin: 0 10px;
 }
 
 #names-list li ion-icon {
@@ -126,7 +140,12 @@ button.standard-button:disabled {
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.poke-card {
+#pokemon-card-place.double {
+	grid-template-columns: 1fr 1fr;
+}
+
+.poke-card,
+.double-card {
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -140,6 +159,19 @@ button.standard-button:disabled {
 	padding: 10px;
 }
 
+.double-card {
+	width: 400px;
+}
+
+.poke-double {
+	display: flex;
+	justify-content: center;
+	align-items: end;
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
 .poke-card .player-name {
 	font-size: 24px;
 	font-weight: 700;
@@ -150,9 +182,10 @@ button.standard-button:disabled {
 	flex-direction: column;
 	position: relative;
 	width: 100%;
-	height: 100%;
+	height: 90%;
 	justify-content: space-between;
 	align-items: center;
+	margin: 0;
 }
 
 .poke-card img {
@@ -375,20 +408,6 @@ button.standard-button:disabled {
 	border: 3px solid var(--primary-color-darker);
 }
 
-#pokemon-grid {
-	max-width: 1000px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-}
-
-#catch-pokemon {
-	min-width: 480px;
-	width: 100%;
-	max-width: 600px;
-}
-
 @media screen and (max-width: 1100px) {
 	#pokemon-card-place {
 		grid-template-columns: 1fr 1fr 1fr;
@@ -401,5 +420,11 @@ button.standard-button:disabled {
 @media screen and (max-width: 860px) {
 	#pokemon-card-place {
 		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	#pokemon-card-place {
+		grid-template-columns: 1fr;
 	}
 }
